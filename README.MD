@@ -1,23 +1,18 @@
 # ETSII ULL Grado de Informatica
 
-## Práctica: Conversor en JavaScript de grados Celsius a Farenheit y viceversa
+## Requisitos
 
-### Que aprendemos
+Modifique el código de la práctica anterior de manera que:
 
-* HTML básico
-* JavaScript básico
-* Expresiones Regulares
-* Un poquito de CSS
-* Uso de Emmet (instale el plugin para su editor)
-* Uso de Mocha y Chai 
-* Uso de Gulp
+- Se eliminen todos los Switch Smell
+- Se eliminen todas las debilidades señaladas en la sección Debilidades
+- Se distribuyan las clases en ficheros separados de una manera racional
+- Recuerde que un requisito de la práctica anterior era que el constructor de Medida pudiera llamarse con un sólo argumento:
+    ```javascript
+      console.log(new Medida("32F")); // Prueba polimorfismo del constructor de Medida
+    ```
+    La expresión regular necesaria para usar es un prefijo de la expresión regular usada en la conversión. Se plantea así el       requisito de reciclar la expresión regular factorizando el código de las mismas.
 
-### Despliegue en github.io
+- En esta tarea no se pide que use pruebas, ni cubrimiento, ni Karma ni Travis.
 
-* [http://crguezl.github.io/ull-etsii-grado-pl-1213-temperature-converter/](http://crguezl.github.io/ull-etsii-grado-pl-1213-temperature-converter/)
-* [http://ULL-ESIT-GRADOII-DSI.github.io/ull-etsii-grado-dsi-simple/](http://ULL-ESIT-GRADOII-DSI.github.io/ull-etsii-grado-dsi-simple/)
-
-### Ejecutar las pruebas
-
-* [http://crguezl.github.io/ull-etsii-grado-pl-1213-temperature-converter/tests/index.html](http://crguezl.github.io/ull-etsii-grado-pl-1213-temperature-converter/tests/index.html)
-* [http://ULL-ESIT-GRADOII-DSI.github.io/ull-etsii-grado-dsi-simple/tests/index.html](http://ULL-ESIT-GRADOII-DSI.github.io/ull-etsii-grado-dsi-simple/tests/index.html)
+LINKS:

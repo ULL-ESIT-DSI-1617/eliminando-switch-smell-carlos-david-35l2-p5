@@ -1,8 +1,9 @@
 "use strict"; // Use ECMAScript 5 strict mode in browsers that support it
 
-function calculate() {
+function calculate(temperature) {
   var result = new Temperatura();
-  var temp = original.value;
+  // var temp = original.value;
+  var temp = temperature;
   var regexp = /([-+]?\d+(?:\.\d*)?)\s*([fFcCkK])\s*(?:to)?\s*([fFcCkK])/;
 
   var m = temp.match(regexp);

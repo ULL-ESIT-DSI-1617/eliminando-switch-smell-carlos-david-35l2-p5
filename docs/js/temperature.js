@@ -1,37 +1,67 @@
-"use strict"; // Use ECMAScript 5 strict mode in browsers that support it
-
-function Temperatura (valor, tipo_origen, tipo_destino){
-  Medida.call(this, valor, tipo_origen, tipo_destino);
+function Temperatura(valor,tipo)
+{
+  Medida.call(this, valor, tipo);
 }
 
-Temperatura.prototype = new Medida();
+Temperatura.prototype = new Medida ();
+Temperatura.prototype.constructor = Temperatura;
 
-//Convertir Celsius a Farenheit
-Temperatura.prototype.convertirC_F = function(){
-  return ((this.get_valor()*9)/5)+32;
-}
-//Convertir Celsius a Kelvin
-Temperatura.prototype.convertirC_K = function(){
-  return (this.get_valor()+273.15);
-}
-//Convertir Farenheit a Celsius
-Temperatura.prototype.convertirF_C = function(){
-  return ((this.get_valor()-32)*5)/9;
-}
-//Convertir Farenheit a Kelvin
-Temperatura.prototype.convertirF_K = function(){
-  return (((this.get_valor()-32)*5)/9)+273.15;
-}
-//Convertir Kelvin a Celsius
-Temperatura.prototype.convertirK_C = function(){
-  return (this.get_valor()-273.15);
-}
-//Convertir Kelvin a Farenheit
-Temperatura.prototype.convertirK_F = function(){
-  return (((this.get_valor()-273.15)*9)/5)+32;
+ var measures = Medida.measures;
+
+
+function Celsius(valor)
+{
+  Temperatura.call(this, valor);
 }
 
-Temperatura.prototype.mostrar = function(){
-  var result = this.get_valor() + " " + this.get_tipo_destino();
+Celsius.prototype = new Temperatura();
+Celsius.prototype.constructor = Celsius;
+measures.c  = Celsius;
+
+Celsius.prototype.toFahrenheit = function () {
+  var result = (this.valor * 9/5)+32;
+  return result;
+}
+
+Celsius.prototype.toKelvin = function () {
+  var result = parseFloat(this.valor + 273.15);
+  return result;
+}
+
+function Kelvin(valor)
+{
+  Temperatura.call(this, valor);
+}
+
+Kelvin.prototype = new Temperatura();
+Kelvin.prototype.constructor = Kelvin;
+ measures.k = Kelvin;
+
+Kelvin.prototype.toCelsius = function () {
+  var result = this.valor - 273.15;
+  return result;
+}
+
+Kelvin.prototype.toFahrenheit = function () {
+  var result = ((this.valor - 273.15) * 9/5) + 32;
+  return result;
+}
+
+function Fahrenheit(valor)
+{
+  Temperatura.call(this, valor);
+}
+
+Fahrenheit.prototype = new Temperatura();
+Fahrenheit.prototype.constructor = Fahrenheit;
+measures.f = Fahrenheit;
+
+Fahrenheit.prototype.toCelsius = function () {
+  var result = (this.valor - 32) * 5/9;
+  return result;
+}
+
+Fahrenheit.prototype.toKelvin = function () {
+  var result = ((this.valor - 32) / (9/5)) + 273.15;
   return result;
 }

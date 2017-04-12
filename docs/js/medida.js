@@ -1,61 +1,47 @@
-"use strict"; // Use ECMAScript 5 strict mode in browsers that support it
-const regexp = /([-+]?\d+(?:\.\d*)?)\s*([fFcCkK])\s*(?:to)?\s*([fFcCkK])/;
+var regexp = XRegExp('^([ ]*) \n' +
+                    '(?<val> [-+]?[0-9]+(\.[0-9]+)?(?:e[+-]?[0-9]+)?) # val \n' +
+                    '([ ]*) \n' +
+                    '(?<tip> [a-zA-Z]) # tip \n' +
+                    '([ ]*) \n' +
+                    '(?<to> (to))? # to \n' +
+                    '([ ]*) \n' +
+                    '(?<para> [a-zA-Z]+) # para \n' +
+                    '([ ]*)$','x');
 
-function Medida (valor, tipo_origen, tipo_destino) {
-  this.valor_ = valor;
-  this.tipo_origen_ = tipo_origen;
-  this.tipo_destino_ = tipo_destino;
-}
 
-Medida.prototype.get_valor = function(){return this.valor_;}
-Medida.prototype.get_tipo_origen = function(){return this.tipo_origen_;}
-Medida.prototype.get_tipo_destino = function(){return this.tipo_destino_;}
 
-Medida.prototype.set_valor = function(valor){this.valor_ = valor;}
-Medida.prototype.set_tipo_origen = function(tipo_origen){this.tipo_origen_ = tipo_origen;}
-Medida.prototype.set_tipo_destino = function(tipo_destino){this.tipo_destino_ = tipo_destino;}
-
-Medida.prototype.convertir = function(valor) {
-
-    var result = new Temperatura();
-    var _m = valor.match(regexp);
-
-    if (_m) {
-      var t = new Temperatura()
-
-      t.set_valor(parseFloat(_m[1]));
-      t.set_tipo_origen(_m[2]);
-      t.set_tipo_destino(_m[3]);
-
-      if ((t.get_tipo_origen() == 'c' || t.get_tipo_origen() == 'C') && ((t.get_tipo_destino() == 'f' || t.get_tipo_destino() == 'F'))) {
-        result.set_valor(t.convertirC_F());
-        result.set_tipo_destino("F");
-      }
-      else if ((t.get_tipo_origen() == 'c' || t.get_tipo_origen() == 'C') && ((t.get_tipo_destino() == 'k' || t.get_tipo_destino() == 'K'))) {
-        result.set_valor(t.convertirC_K());
-        result.set_tipo_destino("K");
-      }
-      else if ((t.get_tipo_origen() == 'f' || t.get_tipo_origen() == 'F') && ((t.get_tipo_destino() == 'c' || t.get_tipo_destino() == 'C'))) {
-        result.set_valor(t.convertirF_C());
-        result.set_tipo_destino("C");
-      }
-      else if ((t.get_tipo_origen() == 'f' || t.get_tipo_origen() == 'F') && ((t.get_tipo_destino() == 'k' || t.get_tipo_destino() == 'K'))) {
-        result.set_valor(t.convertirF_K());
-        result.set_tipo_destino("K");
-      }
-      else if ((t.get_tipo_origen() == 'k' || t.get_tipo_origen() == 'K') && ((t.get_tipo_destino() == 'c' || t.get_tipo_destino() == 'C'))) {
-        result.set_valor(t.convertirK_C());
-        result.set_tipo_destino("C");
-      }
-      else if ((t.get_tipo_origen() == 'k' || t.get_tipo_origen() == 'K') && ((t.get_tipo_destino() == 'f' || t.get_tipo_destino() == 'F'))) {
-        result.set_valor(t.convertirK_F());
-        result.set_tipo_destino("F");
-      }
-      var muestra = result.mostrar();
-      return muestra;
-    }
-    else {
-      var error = "ERROR! Try something like '-4.2C to K' or '35C F' instead";
-      return error;
+function Medida (valor,tipo)
+{
+    var val = XRegExp.exec(valor, regexp);
+    if (val) {
+      this.valor = val[1];
+      this.tipo = val[2];
+    } else {
+      this.valor = valor;
+      this.tipo = tipo;
     }
 }
+
+Medida.measures = {};
+
+Medida.convertir = function(valor) {
+
+  var match = XRegExp.exec(valor, regexp);
+  if (match) {
+    var numero = match.val,
+        tipo   = match.tip.toLowerCase(),
+        destino = match.para.toLowerCase();
+
+    try {
+      var source = new measures[tipo](numero);
+      var target = "to"+measures[destino].name;
+      return source[target]().toFixed(2) + " "+measures[destino].name;
+    }
+    catch(err) {
+      console.log(err);
+      return 'Desconozco esas unidades de medida de temperatura';
+    }
+  }
+  else
+    return "Introduzca una temperatura valida: 32 F to C";
+};

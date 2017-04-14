@@ -1,6 +1,8 @@
 # ETSII ULL Grado de Informatica
 
-## Requisitos
+## Práctica: Eliminando Switch Smell
+
+### Requisitos
 
 Modifique el código de la práctica anterior de manera que:
 
@@ -15,4 +17,18 @@ Modifique el código de la práctica anterior de manera que:
 
 - En esta tarea no se pide que use pruebas, ni cubrimiento, ni Karma ni Travis.
 
-LINKS:
+### LINKS:
+
+[Campus De La Asignatura](https://campusvirtual.ull.es/1617/course/view.php?id=1136)
+
+[Descripción De La Práctica](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicanoswitchsmell.html)
+
+[Pagina personal Carlos](https://charly-poket.github.io/)
+
+[Pagina Personal David](https://alu0100851236.github.io/)
+
+Nubes en las que se ha desplegado esta práctica:
+
+[Ghpages](https://ull-esit-dsi-1617.github.io/eliminando-switch-smell-carlos-david-35l2-p5/)
+
+[Heroku](https://agile-oasis-63092.herokuapp.com/)
